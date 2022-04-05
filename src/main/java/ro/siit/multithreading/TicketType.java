@@ -4,10 +4,7 @@ import java.util.Random;
 
 /**
  * Ticket enum class with ticket types.
- * Contains static method to generate ticket automatically
- *
- * @author  Andrei Chirila
- *
+ * Contains static method to generate ticket randomly
  */
 public enum TicketType {
     FULL,

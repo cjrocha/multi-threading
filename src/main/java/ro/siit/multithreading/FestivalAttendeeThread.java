@@ -1,14 +1,14 @@
 package ro.siit.multithreading;
 
 import java.util.Objects;
+import java.util.logging.Logger;
 
 /**
  * FestivalAtendeeThread implements Runnable instantiated with TicketType, gate.
  * Adds current instance to FestivalGate in method run()
- *
- * @author  Andrei Chirila
  */
 public class FestivalAttendeeThread extends Person implements Runnable, Comparable<FestivalAttendeeThread> {
+    private static Logger logger = Logger.getLogger("multithread.log");
     private TicketType ticketType;
     private FestivalGate gate;
 
@@ -21,13 +21,18 @@ public class FestivalAttendeeThread extends Person implements Runnable, Comparab
                 ticketType.equals(TicketType.ONE_DAY)||
                 ticketType.equals(TicketType.ONE_DAY_VIP)) {
             this.ticketType = ticketType;
+            logger.info("Ticket was validated");
         }
-        else throw new IllegalArgumentException("Ticket is not valid.");
+        else {
+            logger.severe("Ticket is not valid");
+            throw new IllegalArgumentException("Ticket is not valid.");
+        }
     }
 
     @Override
     public void run() {
         gate.addToGate(this);
+        logger.info("New attendee has entered the gate");
         System.out.println("Entering gate");
     }
 
@@ -37,9 +42,9 @@ public class FestivalAttendeeThread extends Person implements Runnable, Comparab
 
     @Override
     public String toString() {
+        logger.info("We recorded a ticket type: "+ticketType);
         return "FestivalAttendeeThread{" +
                 "ticketType=" + ticketType +
-//                ", thread=" + thread +
                 '}';
     }
 

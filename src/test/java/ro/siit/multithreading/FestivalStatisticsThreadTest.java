@@ -17,13 +17,17 @@ class FestivalStatisticsThreadTest {
             new FestivalStatisticsThread(gate);;
         });
         assertEquals("Statistics thread is already instantiated!", e1.getMessage());
+
         //start statistics thread
         statistics.start();
+
         //generate 100 attendee threads
         FestivalAttendeeGenerator.generateAttendees(gate,100);
+
         //get the queue with attendees and assert is filled
         Queue<FestivalAttendeeThread> q = gate.transmitQueue();
         assertEquals(q.size(),100);
+
         //stop the satistics thread
         statistics.stop();
     }

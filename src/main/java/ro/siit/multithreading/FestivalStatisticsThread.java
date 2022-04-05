@@ -2,26 +2,22 @@ package ro.siit.multithreading;
 
 import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.logging.Logger;
 
 /**
- * Festival Statistics Thread generates statistics of FestivalGate every 5 seconds.
- * Singelton, in public constructor throw exception
- *
- * @author  Andrei Chirila
- *
+ * Festival Statistics Thread generates statistics
+ * of FestivalGate every 5 seconds.
  */
 public class FestivalStatisticsThread extends Thread {
+    private static Logger logger = Logger.getLogger("multithread.log");
     private static FestivalStatisticsThread instance = null;
     private FestivalGate gate;
     private Queue<FestivalAttendeeThread> queue = new PriorityQueue<>();
 
-    private FestivalStatisticsThread() {
-
-    }
-
     public FestivalStatisticsThread(FestivalGate gate)
     {
         if (instance != null) {
+            logger.severe("Statistics thread is already instantiated!");
             throw new IllegalArgumentException("Statistics thread is already instantiated!");
         }
         else {
@@ -30,11 +26,15 @@ public class FestivalStatisticsThread extends Thread {
         }
     }
 
+    private FestivalStatisticsThread() {
+    }
+
     @Override
     public void run() {
        while(true) {
            try {
-               Thread.sleep(5000);
+               logger.info("Sleeping for 5 seconds until next reading of gate entries");
+               Thread.sleep(5*1000);
            } catch (InterruptedException e) {
                e.printStackTrace();
            }
@@ -69,6 +69,7 @@ public class FestivalStatisticsThread extends Thread {
                     count_One_Day_Vip++;
                 }
             }
+            logger.info("Static was generated successfully");
             System.out.println(queue.size()+" people entered"+"\n"
                     +count_Full+" people have full tickets"+"\n"
                     +count_Full_Vip+" people have full VIP tickets"+"\n"

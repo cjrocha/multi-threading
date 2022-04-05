@@ -4,10 +4,8 @@ import java.util.PriorityQueue;
 import java.util.Queue;
 
 /**
- * FestivalGate contains a queue that holds the attendees that pass through gate.
- *
- * @author  Andrei Chirila
- *
+ * FestivalGate contains a queue that holds
+ * the attendees that pass through gate.
  */
 public class FestivalGate<FestivalAttendeeThread> {
     private Queue<FestivalAttendeeThread> gateQueue = new PriorityQueue<>();
