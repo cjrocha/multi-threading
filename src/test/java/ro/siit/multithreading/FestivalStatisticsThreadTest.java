@@ -16,7 +16,7 @@ class FestivalStatisticsThreadTest {
         Exception e1 = assertThrows(IllegalArgumentException.class, ()-> {
             new FestivalStatisticsThread(gate);;
         });
-        assertEquals("Statistics thread is allready instaniated!", e1.getMessage());
+        assertEquals("Statistics thread is already instantiated!", e1.getMessage());
         //start statistics thread
         statistics.start();
         //generate 100 attendee threads
